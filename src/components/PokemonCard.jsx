@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -6,6 +7,8 @@ const Card = styled.div`
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  background-color: white;
 `;
 
 const PokemonName = styled.h3`
@@ -25,11 +28,25 @@ const AddButton = styled.button`
   }
 `;
 
-function PokemonCard({ pokemon, addPokemon }) {
+function PokemonCard({ poke, addPokemon }) {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/pokemon/${poke.id}`);
+  };
+
   return (
-    <Card>
-      <PokemonName>{pokemon.name}</PokemonName>
-      <AddButton onClick={() => addPokemon(pokemon)}>추가</AddButton>
+    <Card onClick={handleCardClick}>
+      <img src={poke.img_url} alt={poke.korean_name} />
+      <PokemonName>{poke.korean_name}</PokemonName>
+      <AddButton
+        onClick={(e) => {
+          e.stopPropagation();
+          addPokemon(poke);
+        }}
+      >
+        추가
+      </AddButton>
     </Card>
   );
 }

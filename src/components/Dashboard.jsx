@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 const DashboardContainer = styled.div`
-  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  background-color: rgb(248, 248, 248);
-  border: 1px solid rgb(250, 249, 249);
-  border-radius: 10px;
-  margin-bottom: 20px;
-  text-align: center;
+
+  width: 100%;
 `;
 
 const PokemonList = styled.div`
@@ -22,14 +21,21 @@ const PokemonItem = styled.div`
   background-color: rgb(224, 224, 224);
   border-radius: 5px;
 `;
+const PokemonImage = styled.img`
+  width: 50px;
+  height: 50px;
+`;
 
-function Dashboard({ selectedPokemons }) {
+function Dashboard({ selectedPokemon, removePokemon }) {
   return (
     <DashboardContainer>
-      <h2>나만의 포켓몬</h2>
       <PokemonList>
-        {selectedPokemons.map((pokemon) => (
-          <PokemonItem key={pokemon.id}>{pokemon.name}</PokemonItem>
+        {selectedPokemon.map((pokemon) => (
+          <PokemonItem key={pokemon.id}>
+            <PokemonImage src={pokemon.img_url} alt={pokemon.korean_name} />
+            <div>{pokemon.korean_name}</div>
+            <button onClick={() => removePokemon(pokemon.id)}>제거</button>
+          </PokemonItem>
         ))}
       </PokemonList>
     </DashboardContainer>

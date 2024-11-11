@@ -3,20 +3,20 @@ import styled from "styled-components";
 
 const ListContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  width: 90%;
+  max-width: 1200px;
+  justify-content: center;
 `;
 
-function PokemonList({ pokemons, addPokemon }) {
+function PokemonList({ pokemon, addPokemon }) {
   return (
     <ListContainer>
-      {pokemons.map((pokemon) => {
-        <PokemonCard
-          key={pokemon.id}
-          pokemon={pokemon}
-          addPokemon={addPokemon}
-        />;
+      {pokemon.map((poke) => {
+        return (
+          <PokemonCard key={poke.id} poke={poke} addPokemon={addPokemon} />
+        );
       })}
     </ListContainer>
   );

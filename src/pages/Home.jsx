@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Contariner = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,10 +22,10 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <Contariner>
+    <Container>
       <h1>pokémon 백과사전</h1>
       <Button onClick={() => navigate("/dex")}>백과사전 시작</Button>
-    </Contariner>
+    </Container>
   );
 }
 
