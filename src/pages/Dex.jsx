@@ -1,8 +1,9 @@
-import { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import PokemonList from "../components/PokemonList";
 import MOCK_DATA from "../MOCK_DATA";
 import styled from "styled-components";
+import { PokemonContext } from "../context/PokemonContext";
+import { useContext } from "react";
 
 const PageWrapper = styled.div`
   width: 100vw;
@@ -33,22 +34,8 @@ const Container = styled.div`
 `;
 
 function Dex() {
-  const [selectedPokemon, setSelectedPokemon] = useState([]);
-
-  const addPokemon = (pokemon) => {
-    if (selectedPokemon.length >= 6) {
-      alert("최대 6개의 포켓몬만 선택할 수 있습니다.");
-      return;
-    }
-
-    if (!selectedPokemon.find((p) => p.id === pokemon.id)) {
-      setSelectedPokemon([...selectedPokemon, pokemon]);
-    }
-  };
-
-  const removePokemon = (pokemonId) => {
-    setSelectedPokemon(selectedPokemon.filter((p) => p.id !== pokemonId));
-  };
+  const { selectedPokemon, addPokemon, removePokemon } =
+    useContext(PokemonContext);
 
   return (
     <PageWrapper>

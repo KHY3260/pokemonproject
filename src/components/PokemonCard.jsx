@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { PokemonContext } from "../context/PokemonContext";
 
 const Card = styled.div`
   padding: 10px;
@@ -28,7 +30,8 @@ const AddButton = styled.button`
   }
 `;
 
-function PokemonCard({ poke, addPokemon }) {
+function PokemonCard({ poke }) {
+  const { addPokemon } = useContext(PokemonContext);
   const navigate = useNavigate();
 
   const handleCardClick = () => {

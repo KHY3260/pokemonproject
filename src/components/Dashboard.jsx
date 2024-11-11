@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { PokemonContext } from "../context/PokemonContext";
 
 const DashboardContainer = styled.div`
   display: flex;
@@ -26,9 +28,12 @@ const PokemonImage = styled.img`
   height: 50px;
 `;
 
-function Dashboard({ selectedPokemon, removePokemon }) {
+function Dashboard() {
+  const { selectedPokemon, removePokemon } = useContext(PokemonContext);
+
   return (
     <DashboardContainer>
+      <h2>나만의 포켓몬</h2>
       <PokemonList>
         {selectedPokemon.map((pokemon) => (
           <PokemonItem key={pokemon.id}>
