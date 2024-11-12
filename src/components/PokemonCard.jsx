@@ -4,29 +4,44 @@ import styled from "styled-components";
 import { PokemonContext } from "../context/PokemonContext";
 
 const Card = styled.div`
-  padding: 10px;
+  padding: 20px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
   background-color: white;
+  width: 150px;
+  margin: 8px;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 const PokemonName = styled.h3`
   font-size: 1.2em;
   margin: 10px 0;
+  color: #333;
+`;
+
+const PokemonNumber = styled.p`
+  font-size: 0.9em;
+  color: #777;
+  margin: 5px 0;
 `;
 
 const AddButton = styled.button`
   padding: 5px 10px;
-  background-color: rgb(255, 0, 0);
+  background-color: #ff0000;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
+
   &:hover {
-    background-color: rgb(204, 0, 0);
+    background-color: #cc0000;
   }
 `;
 
@@ -42,6 +57,7 @@ function PokemonCard({ poke }) {
     <Card onClick={handleCardClick}>
       <img src={poke.img_url} alt={poke.korean_name} />
       <PokemonName>{poke.korean_name}</PokemonName>
+      <PokemonNumber>No. {poke.id.toString().padStart(3, "0")}</PokemonNumber>
       <AddButton
         onClick={(e) => {
           e.stopPropagation();

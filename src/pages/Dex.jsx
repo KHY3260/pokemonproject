@@ -6,19 +6,12 @@ import { PokemonContext } from "../context/PokemonContext";
 import { useContext } from "react";
 
 const PageWrapper = styled.div`
-  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffebcd;
+  background-color: #f8eacb;
   min-height: 100vh;
-  padding: 20px;
-`;
-
-const Title = styled.h2`
-  font-size: 2rem;
-  color: #d32f2f;
-  margin-bottom: 20px;
+  padding: 40px 0;
 `;
 
 const Container = styled.div`
@@ -40,7 +33,6 @@ function Dex() {
   return (
     <PageWrapper>
       <Container>
-        <Title>나만의 포켓몬</Title>
         <Dashboard
           selectedPokemon={selectedPokemon}
           removePokemon={removePokemon}

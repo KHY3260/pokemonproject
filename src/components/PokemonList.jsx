@@ -5,19 +5,18 @@ const ListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
-  width: 90%;
-  max-width: 1200px;
-  justify-content: center;
+  width: 80%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 0;
 `;
 
 function PokemonList({ pokemon, addPokemon }) {
   return (
     <ListContainer>
-      {pokemon.map((poke) => {
-        return (
-          <PokemonCard key={poke.id} poke={poke} addPokemon={addPokemon} />
-        );
-      })}
+      {pokemon.map((poke) => (
+        <PokemonCard key={poke.id} poke={poke} addPokemon={addPokemon} />
+      ))}
     </ListContainer>
   );
 }

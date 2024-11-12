@@ -1,31 +1,70 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { PokemonContext } from "../context/PokemonContext";
+import pokeballImage from "../assets/pokeball.png";
 
 const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-
   width: 100%;
 `;
 
-const PokemonList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+const Title = styled.h2`
+  font-size: 1.5em;
+  color: #d9534f;
+  margin-bottom: 20px;
 `;
 
-const PokemonItem = styled.div`
-  padding: 10px;
-  background-color: rgb(224, 224, 224);
-  border-radius: 5px;
+const PokemonListContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
 `;
+
+const PokemonSlot = styled.div`
+  width: 100px;
+  min-height: 130px;
+  border: 2px dashed #ddd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 10px;
+`;
+
+const PokemonName = styled.h3`
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #333;
+`;
+
+const PokemonNumber = styled.p`
+  font-size: 0.9em;
+  color: #777;
+  margin: 5px 0;
+`;
+
 const PokemonImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
+`;
+
+const RemoveButton = styled.button`
+  margin-top: 10px;
+  padding: 5px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #c9302c;
+  }
 `;
 
 function Dashboard() {
@@ -33,16 +72,30 @@ function Dashboard() {
 
   return (
     <DashboardContainer>
-      <h2>나만의 포켓몬</h2>
-      <PokemonList>
-        {selectedPokemon.map((pokemon) => (
-          <PokemonItem key={pokemon.id}>
-            <PokemonImage src={pokemon.img_url} alt={pokemon.korean_name} />
-            <div>{pokemon.korean_name}</div>
-            <button onClick={() => removePokemon(pokemon.id)}>제거</button>
-          </PokemonItem>
+      <Title>나만의 포켓몬</Title>
+      <PokemonListContainer>
+        {Array.from({ length: 6 }).map((_, index) => (
+          <PokemonSlot key={index}>
+            {selectedPokemon[index] ? (
+              <>
+                <PokemonImage
+                  src={selectedPokemon[index].img_url}
+                  alt={selectedPokemon[index].korean_name}
+                />
+                <PokemonName>{selectedPokemon[index].korean_name}</PokemonName>
+                <PokemonNumber>No. {selectedPokemon[index].id}</PokemonNumber>
+                <RemoveButton
+                  onClick={() => removePokemon(selectedPokemon[index].id)}
+                >
+                  제거
+                </RemoveButton>
+              </>
+            ) : (
+              <PokemonImage src={pokeballImage} alt="빈 포켓몬 슬롯" />
+            )}
+          </PokemonSlot>
         ))}
-      </PokemonList>
+      </PokemonListContainer>
     </DashboardContainer>
   );
 }
