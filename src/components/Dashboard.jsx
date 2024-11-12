@@ -74,18 +74,20 @@ function Dashboard() {
     <DashboardContainer>
       <Title>나만의 포켓몬</Title>
       <PokemonListContainer>
-        {Array.from({ length: 6 }).map((_, index) => (
-          <PokemonSlot key={index}>
-            {selectedPokemon[index] ? (
+        {Array.from({ length: 6 }).map((_, pokemon) => (
+          <PokemonSlot key={pokemon}>
+            {selectedPokemon[pokemon] ? (
               <>
                 <PokemonImage
-                  src={selectedPokemon[index].img_url}
-                  alt={selectedPokemon[index].korean_name}
+                  src={selectedPokemon[pokemon].img_url}
+                  alt={selectedPokemon[pokemon].korean_name}
                 />
-                <PokemonName>{selectedPokemon[index].korean_name}</PokemonName>
-                <PokemonNumber>No. {selectedPokemon[index].id}</PokemonNumber>
+                <PokemonName>
+                  {selectedPokemon[pokemon].korean_name}
+                </PokemonName>
+                <PokemonNumber>No. {selectedPokemon[pokemon].id}</PokemonNumber>
                 <RemoveButton
-                  onClick={() => removePokemon(selectedPokemon[index].id)}
+                  onClick={() => removePokemon(selectedPokemon[pokemon].id)}
                 >
                   제거
                 </RemoveButton>
