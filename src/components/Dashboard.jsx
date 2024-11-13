@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { PokemonContext } from "../context/PokemonContext";
+import { removePokemon } from "../redux/pokemonSlice";
 import pokeballImage from "../assets/pokeball.png";
 
 const DashboardContainer = styled.div`
@@ -68,26 +68,27 @@ const RemoveButton = styled.button`
 `;
 
 function Dashboard() {
-  const { selectedPokemon, removePokemon } = useContext(PokemonContext);
+  const selectedPokemon = useSelector((state) => state.pokemon.selectedPokemon);
+  const dispatch = useDispatch();
 
   return (
     <DashboardContainer>
       <Title>나만의 포켓몬</Title>
       <PokemonListContainer>
-        {Array.from({ length: 6 }).map((_, pokemon) => (
-          <PokemonSlot key={pokemon}>
-            {selectedPokemon[pokemon] ? (
+        {Array.from({ length: 6 }).map((_, index) => (
+          <PokemonSlot key={index}>
+            {selectedPokemon[index] ? (
               <>
                 <PokemonImage
-                  src={selectedPokemon[pokemon].img_url}
-                  alt={selectedPokemon[pokemon].korean_name}
+                  src={selectedPokemon[index].img_url}
+                  alt={selectedPokemon[index].korean_name}
                 />
-                <PokemonName>
-                  {selectedPokemon[pokemon].korean_name}
-                </PokemonName>
-                <PokemonNumber>No. {selectedPokemon[pokemon].id}</PokemonNumber>
+                <PokemonName>{selectedPokemon[index].korean_name}</PokemonName>
+                <PokemonNumber>No. {selectedPokemon[index].id}</PokemonNumber>
                 <RemoveButton
-                  onClick={() => removePokemon(selectedPokemon[pokemon].id)}
+                  onClick={() =>
+                    dispatch(removePokemon(selectedPokemon[index].id))
+                  }
                 >
                   제거
                 </RemoveButton>

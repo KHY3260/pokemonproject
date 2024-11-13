@@ -15,7 +15,7 @@ const PageWrapper = styled.div`
 const Container = styled.div`
   padding: 20px;
   text-align: center;
-  background-color: #ffebcd;
+  background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 `;
@@ -57,12 +57,16 @@ function PokemonDetail() {
 
   const pokemon = MOCK_DATA.find((p) => p.id === parseInt(id));
 
+  if (!pokemon) {
+    return <p>포켓몬을 찾을 수 없습니다.</p>;
+  }
+
   return (
     <PageWrapper>
       <Container>
-        <PokemonName>{pokemon.korean_name}</PokemonName>
-        <PokemonType>타입: {pokemon.types.join(", ")}</PokemonType>
         <PokemonImage src={pokemon.img_url} alt={pokemon.korean_name} />
+        <PokemonName>{pokemon.korean_name}</PokemonName>
+        <PokemonType>{pokemon.types.join(", ")}</PokemonType>
         <PokemonType>{pokemon.description}</PokemonType>
         <BackButton onClick={() => navigate(-1)}>뒤로 가기</BackButton>
       </Container>

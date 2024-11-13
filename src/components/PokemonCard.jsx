@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { PokemonContext } from "../context/PokemonContext";
+import { addPokemon } from "../redux/pokemonSlice";
 
 const Card = styled.div`
   padding: 20px;
@@ -19,6 +19,11 @@ const Card = styled.div`
     transform: translateY(-7px);
     box-shadow: 0px 8px 12px rgba(37, 37, 37, 0.4);
   }
+`;
+
+const PokemonImage = styled.img`
+  width: 100px;
+  height: 100px;
 `;
 
 const PokemonName = styled.h3`
@@ -48,7 +53,7 @@ const AddButton = styled.button`
 `;
 
 function PokemonCard({ poke }) {
-  const { addPokemon } = useContext(PokemonContext);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleCardClick = () => {
@@ -57,13 +62,13 @@ function PokemonCard({ poke }) {
 
   return (
     <Card onClick={handleCardClick}>
-      <img src={poke.img_url} alt={poke.korean_name} />
+      <PokemonImage src={poke.img_url} alt={poke.korean_name} />
       <PokemonName>{poke.korean_name}</PokemonName>
       <PokemonNumber>No. {poke.id.toString().padStart(3, "0")}</PokemonNumber>
       <AddButton
         onClick={(e) => {
           e.stopPropagation();
-          addPokemon(poke);
+          dispatch(addPokemon(poke));
         }}
       >
         추가

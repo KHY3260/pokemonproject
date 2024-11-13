@@ -1,5 +1,7 @@
-import PokemonCard from "./PokemonCard";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import PokemonCard from "./PokemonCard";
+import { addPokemon } from "../redux/pokemonSlice";
 
 const ListContainer = styled.div`
   display: grid;
@@ -11,11 +13,17 @@ const ListContainer = styled.div`
   padding: 20px 0;
 `;
 
-function PokemonList({ pokemon, addPokemon }) {
+function PokemonList({ pokemon }) {
+  const dispatch = useDispatch();
+
   return (
     <ListContainer>
       {pokemon.map((poke) => (
-        <PokemonCard key={poke.id} poke={poke} addPokemon={addPokemon} />
+        <PokemonCard
+          key={poke.id}
+          poke={poke}
+          addPokemon={() => dispatch(addPokemon(poke))}
+        />
       ))}
     </ListContainer>
   );
