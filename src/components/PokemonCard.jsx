@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { addPokemon } from "../redux/pokemonSlice";
+import { addPokemon } from "./redux/pokemonSlice";
 
 const Card = styled.div`
   padding: 20px;
