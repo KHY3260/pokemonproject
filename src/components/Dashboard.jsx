@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { removePokemon } from "./redux/pokemonSlice";
+import { removePokemon } from "../redux/pokemonSlice";
 import pokeballImage from "../assets/pokeball.png";
 
 const DashboardContainer = styled.div`

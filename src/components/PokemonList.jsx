@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
-import { addPokemon } from "./redux/pokemonSlice";
+import { addPokemon } from "../redux/pokemonSlice";
 
 const ListContainer = styled.div`
   display: grid;
